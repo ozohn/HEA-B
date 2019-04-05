@@ -34,7 +34,7 @@ function createToken(user, res, next) {
     },
     (err, token) => {
       if (err) {
-        respondError422(res, next);
+        respondError402(res, next);
       } else {
         res.json({
           token

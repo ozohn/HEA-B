@@ -1,5 +1,6 @@
 const express = require("express");
 const volleyball = require("volleyball");
+const cors = require('cors');
 
 const app = express();
 
@@ -8,6 +9,7 @@ const user = require('./router/user.js');
 
 app.use(volleyball);
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.json({
@@ -16,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use('/auth', auth);
-app.use('/router', user)
+app.use('/', user)
 
 function notFound(req, res, next) {
   res.status(404);
