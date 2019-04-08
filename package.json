@@ -16,6 +16,7 @@
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.2.2",
+    "mongoose": "^5.4.22",
     "monk": "^6.0.6",
     "volleyball": "^1.5.1"
   },
