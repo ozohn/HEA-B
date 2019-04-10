@@ -64,8 +64,9 @@ router.post('/signup', async (req, res) => {
                 username: req.body.username
             });
             const newUser = await user.save();
-            createToken(newUser, res, next)
-            res.json({done: 'signup'})
+            createToken(newUser, res, next);
+            delete newUser.password;
+            res.json(newUser);
         }
     }  catch  {
         res.json({ error: "signin error"});
