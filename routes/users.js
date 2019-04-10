@@ -10,13 +10,14 @@ router.post('/signin', (req, res) => {
 })
 router.post('/signup', async (req, res) => {
     const user = new User({
-        userId: req.body.id,
+        userid: req.body.userid,
         password: req.body.password,
-        username: req.body.name
-    })
+        username: req.body.username
+    });
+    
     try {
         const newUser = await user.save();
-        res.redirect('/');
+        res.json({done: 'signup'})
     } catch {
         res.json({error: 'signup error'})
     }

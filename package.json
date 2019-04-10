@@ -8,7 +8,9 @@
     "express": "^4.16.4",
     "mongoose": "^5.5.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "dotenv": "^7.0.0"
+  },
   "scripts": {
     "start": "node server.js",
     "devStart": "nodemon server.js"
