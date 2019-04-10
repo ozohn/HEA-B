@@ -6,7 +6,20 @@ router.get('/', function (req, res) {
     res.send('Hello');
 })
 router.post('/signin', (req, res) => {
-
+    let searchOptions = {};
+    if(req.body.userid !== null && req.body.userid !== ''){
+        searchOptions.userid = req.body.userid;
+        searchOptions.password = req.body.password;
+    }
+    try {
+        const authors = await Author.find(searchOptions);
+        res.json({
+            "done": "signin",
+            authors: authors
+        });
+    } catch {
+        res.json({"err": "signin error"});
+    }
 })
 router.post('/signup', async (req, res) => {
     const user = new User({
