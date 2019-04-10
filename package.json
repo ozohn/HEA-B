@@ -1,15 +1,28 @@
 {
-  "name": "server",
+  "name": "HEA-B",
   "version": "1.0.0",
-  "description": "",
+  "description": "H-SENS server repository",
   "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.0"
+  },
+  "devDependencies": {
+    "dotenv": "^7.0.0"
+  },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js -w"
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdvonzoo/HEA-B.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+<<<<<<< HEAD
   "dependencies": {
     "bcrypt": "^3.0.5",
     "express": "^4.16.4",
@@ -19,8 +32,10 @@
     "mongoose": "^5.4.22",
     "monk": "^6.0.6",
     "volleyball": "^1.5.1"
+=======
+  "bugs": {
+    "url": "https://github.com/pdvonzoo/HEA-B/issues"
+>>>>>>> 49011ce1745f7bb20a008ecc98f0de90d1012db0
   },
-  "devDependencies": {
-    "nodemon": "^1.18.10"
-  }
+  "homepage": "https://github.com/pdvonzoo/HEA-B#readme"
 }
