@@ -1,5 +1,5 @@
 {
-  "name": "HEA-B",
+  "name": "heab",
   "version": "1.0.0",
   "description": "H-SENS server repository",
   "main": "index.js",
@@ -22,20 +22,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-<<<<<<< HEAD
-  "dependencies": {
-    "bcrypt": "^3.0.5",
-    "express": "^4.16.4",
-    "joi": "^14.3.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.2.2",
-    "mongoose": "^5.4.22",
-    "monk": "^6.0.6",
-    "volleyball": "^1.5.1"
-=======
   "bugs": {
     "url": "https://github.com/pdvonzoo/HEA-B/issues"
->>>>>>> 49011ce1745f7bb20a008ecc98f0de90d1012db0
   },
   "homepage": "https://github.com/pdvonzoo/HEA-B#readme"
 }
