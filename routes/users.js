@@ -5,17 +5,17 @@ const User = require("../model/user.js");
 router.get('/', function (req, res) {
     res.send('Hello');
 })
-router.post('/signin', (req, res) => {
+router.post('/signin', async (req, res) => {
     let searchOptions = {};
     if(req.body.userid !== null && req.body.userid !== ''){
         searchOptions.userid = req.body.userid;
         searchOptions.password = req.body.password;
     }
     try {
-        const authors = await Author.find(searchOptions);
+        const users = await User.find(searchOptions);
         res.json({
             "done": "signin",
-            authors: authors
+            users: users
         });
     } catch {
         res.json({"err": "signin error"});
