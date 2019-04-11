@@ -19,6 +19,17 @@ function checkToken(req, res, next){
     }
 }
 
+function isLoggedIn(req, res, next){
+    if(req.user){
+        next();
+    } else {
+        const error = new Error('Un-Authorized');
+        res.state(401);
+        next(error);
+    }
+}
+
 module.exports = {
-    checkToken
+    checkToken,
+    isLoggedIn
 };
