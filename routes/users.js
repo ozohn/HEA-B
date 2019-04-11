@@ -11,6 +11,7 @@ const User = require('../model/user.js');
 router.get("/", function(req, res) {
   res.send("Hello");
 });
+
 router.post("/signin", async (req, res) => {
   let searchOptions = {};
   if (req.body.userid !== null && req.body.userid !== "") {
@@ -23,8 +24,8 @@ router.post("/signin", async (req, res) => {
       const bMatch = await bcrypt.compare(req.body.password, user.password);
       if (bMatch) {
         const payload = {
-          userid: newUser.userid,
-          username: newUser.username
+          userid: user.userid,
+          username: user.username
         };
         try {
           const token = jwt.sign(payload, "secret", { expiresIn: "1d" });
@@ -40,6 +41,7 @@ router.post("/signin", async (req, res) => {
     res.json({ err: "signin error" });
   }
 });
+
 router.post("/signup", async (req, res) => {
   try {
     const user = await User.findOne({ userid: req.body.userid });
@@ -65,6 +67,7 @@ router.post("/signup", async (req, res) => {
       }
       next();
     }
+    //토큰 post 로 보내기
   } catch {
     res.json({ error: "signup error" });
   }
