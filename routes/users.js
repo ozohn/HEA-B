@@ -15,7 +15,9 @@ function createToken(user, res, next) {
       expiresIn: '1d'
     }, (err, token) => {
       if (err) {
-        respondError422(res, next);
+        res.json({
+					error: 'token 생성 에러'
+				})
       } else {
         res.json({
           token
