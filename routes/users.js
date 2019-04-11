@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require("../model/user.js");
@@ -15,7 +15,9 @@ function createToken(user, res, next) {
       expiresIn: '1d'
     }, (err, token) => {
       if (err) {
-        respondError422(res, next);
+        res.json({
+					error: 'token 생성 에러'
+				})
       } else {
         res.json({
           token
@@ -27,7 +29,7 @@ function createToken(user, res, next) {
 router.get('/', function (req, res) {
     res.send('Hello');
 })
-router.post('/signin', (req, res) => {
+router.post('/signin', async (req, res) => {
     let searchOptions = {};
     if(req.body.userid !== null && req.body.userid !== ''){
         searchOptions.userid = req.body.userid;
