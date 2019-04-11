@@ -22,11 +22,16 @@ router.post("/signin", async (req, res) => {
     if (user) {
       const bMatch = await bcrypt.compare(req.body.password, user.password);
       if (bMatch) {
-        createToken(user, res, next);
-        res.json({
-          done: "signin",
-          author: author
-        });
+        const payload = {
+          userid: newUser.userid,
+          username: newUser.username
+        };
+        try {
+          const token = jwt.sign(payload, "secret", { expiresIn: "1d" });
+          res.json({ token });
+        } catch {
+          res.json({ error: "token 생성이 실패하였습니다." });
+        }
       } else {
         res.json({ error: "비밀번호가 틀립니다." });
       }
