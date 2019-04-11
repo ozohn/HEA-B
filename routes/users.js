@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require("../model/user.js");
@@ -34,13 +34,6 @@ router.post('/signin', async (req, res) => {
         searchOptions.password = req.body.password;
     }
     try {
-<<<<<<< HEAD
-        const users = await User.find(searchOptions);
-        res.json({
-            "done": "signin",
-            users: users
-        });
-=======
         const user = await User.findOne(searchOptions);
         if(user){
             const bMatch = await bcrypt.compare(req.body.password, user.password);
@@ -54,7 +47,6 @@ router.post('/signin', async (req, res) => {
                 res.json({ error: '비밀번호가 틀립니다.'})
             }
         }
->>>>>>> 3eb3f0c733f367d9db4d2ca2b4a8cb59265e91be
     } catch {
         res.json({"err": "signin error"});
     }
