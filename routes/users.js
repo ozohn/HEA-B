@@ -6,27 +6,30 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const User = require("../model/user.js");
+const User = require('../model/user.js');
 
 router.get("/", function(req, res) {
   res.send("Hello");
 });
+
 router.post("/signin", async (req, res) => {
-  let searchOptions = {};
-  if (req.body.userid !== null && req.body.userid !== "") {
-    searchOptions.userid = req.body.userid;
-    searchOptions.password = req.body.password;
-  }
   try {
-    const user = await User.findOne(searchOptions);
+    const user = await User.findOne({ userid: req.body.userid });
+    console.log(user);
     if (user) {
+      console.log(user.password);
       const bMatch = await bcrypt.compare(req.body.password, user.password);
       if (bMatch) {
-        createToken(user, res, next);
-        res.json({
-          done: "signin",
-          author: author
-        });
+        const payload = {
+          userid: user.userid,
+          username: user.username
+        };
+        try {
+          const token = jwt.sign(payload, "secret", { expiresIn: "1d" });
+          res.json({ token });
+        } catch {
+          res.json({ error: "token 생성이 실패하였습니다." });
+        }
       } else {
         res.json({ error: "비밀번호가 틀립니다." });
       }
@@ -35,9 +38,11 @@ router.post("/signin", async (req, res) => {
     res.json({ err: "signin error" });
   }
 });
+
 router.post("/signup", async (req, res) => {
   try {
     const user = await User.findOne({ userid: req.body.userid });
+    console.log(user);
     if (user) {
       res.json({ error: "중복된 아이디가 있습니다." });
     } else {
@@ -58,8 +63,8 @@ router.post("/signup", async (req, res) => {
       } catch {
         res.json({ error: "token 생성이 실패하였습니다." });
       }
-      next();
     }
+    //토큰 post 로 보내기
   } catch {
     res.json({ error: "signup error" });
   }
