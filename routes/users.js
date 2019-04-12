@@ -13,14 +13,11 @@ router.get("/", function(req, res) {
 });
 
 router.post("/signin", async (req, res) => {
-  let searchOptions = {};
-  if (req.body.userid !== null && req.body.userid !== "") {
-    searchOptions.userid = req.body.userid;
-    searchOptions.password = req.body.password;
-  }
   try {
-    const user = await User.findOne(searchOptions);
+    const user = await User.findOne({ userid: req.body.userid });
+    console.log(user);
     if (user) {
+      console.log(user.password);
       const bMatch = await bcrypt.compare(req.body.password, user.password);
       if (bMatch) {
         const payload = {
@@ -45,6 +42,7 @@ router.post("/signin", async (req, res) => {
 router.post("/signup", async (req, res) => {
   try {
     const user = await User.findOne({ userid: req.body.userid });
+    console.log(user);
     if (user) {
       res.json({ error: "중복된 아이디가 있습니다." });
     } else {
@@ -65,7 +63,6 @@ router.post("/signup", async (req, res) => {
       } catch {
         res.json({ error: "token 생성이 실패하였습니다." });
       }
-      next();
     }
     //토큰 post 로 보내기
   } catch {

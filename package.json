@@ -12,7 +12,8 @@
     "mongoose": "^5.5.0"
   },
   "devDependencies": {
-    "dotenv": "^7.0.0"
+    "dotenv": "^7.0.0",
+    "nodemon": "^1.18.11"
   },
   "scripts": {
     "start": "node server.js",
