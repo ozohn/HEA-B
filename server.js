@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const middlewares = require('./middlewares/middlewares.js');
@@ -11,13 +10,13 @@ const middlewares = require('./middlewares/middlewares.js');
 const indexRouter = require('./routes/index.js');
 const usersRouter = require('./routes/users.js');
 
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ limit: '10mb', extended: false }));
+app.use(express.json());
 app.use(cors());
 app.use(middlewares.checkToken);
 
 const mongoose = require('mongoose');
-mongoose.connect(process.env.DATABASE_URL, {
+mongoose.connect(process.env.DATABASE_URL, { 
   useNewUrlParser: true,
 });
 const db = mongoose.connection;
