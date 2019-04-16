@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 const checkTokenError = (err, token, res) => {
   if (err) res.status(500).send('토큰 생성 에러');
-  return token;
+  res.json({ token });
 }
 
 async function signIn(user, req, res) {
@@ -28,9 +28,8 @@ async function signIn(user, req, res) {
       payload,
       process.env.TOKEN_SECRET,
       { expiresIn: '1d' },
-      (err, token) => checkTokenError( err, token, res)
+      (err, token) => checkTokenError(err, token, res)
     );
-    res.json({ token });
   } else {
     res.status(401).send('비밀번호가 일치하지 않음');
   }
