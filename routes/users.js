@@ -12,6 +12,11 @@ router.get('/', function(req, res) {
   res.send('Hello');
 });
 
+const checkTokenError = (err, token, res) => {
+  if (err) res.status(500).send('토큰 생성 에러');
+  return token;
+}
+
 async function signIn(user, req, res) {
   const bMatch = await bcrypt.compare(req.body.password, user.password);
   if (bMatch) {
@@ -19,11 +24,15 @@ async function signIn(user, req, res) {
       userid: user.userid,
       username: user.username,
     };
-    //try catch 제거
-    const token = await jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1d' });
+    const token = await jwt.sign(
+      payload,
+      process.env.TOKEN_SECRET,
+      { expiresIn: '1d' },
+      (err, token) => checkTokenError( err, token, res)
+    );
     res.json({ token });
   } else {
-    res.json({ error: '비밀번호가 틀립니다.' });
+    res.status(401).send('비밀번호가 일치하지 않음');
   }
 }
 
@@ -33,25 +42,8 @@ router.post('/signin', async (req, res) => {
     if (user) {
       signIn(user, req, res);
     }
-    //   if (user) {
-    //     const bMatch = await bcrypt.compare(req.body.password, user.password);
-    //     if (bMatch) {
-    //       const payload = {
-    //         userid: user.userid,
-    //         username: user.username,
-    //       };
-    //       try {
-    //         const token = jwt.sign(payload, 'secret', { expiresIn: '1d' });
-    //         res.json({ token });
-    //       } catch {
-    //         res.json({ error: 'token 생성이 실패하였습니다.' });
-    //       }
-    //     } else {
-    //       res.json({ error: '비밀번호가 틀립니다.' });
-    //     }
-    //   }함수로 뺌
-  } catch (e) {
-    res.json({ err: e });
+  } catch {
+    res.status(401).send('데이터베이스에 일치하는 아이디 정보 없음.');
   }
 });
 
@@ -67,7 +59,12 @@ async function signUp(user, req, res) {
     userid: newUser.userid,
     username: newUser.username,
   };
-  const token = jwt.sign(payload, process.env.TOKEN_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign(
+    payload,
+    process.env.TOKEN_SECRET,
+    { expiresIn: '1d' },
+    (err, token) => checkTokenError( err, token, res)
+  );
   res.json({ token });
 }
 
@@ -75,31 +72,13 @@ router.post('/signup', async (req, res) => {
   try {
     const user = await User.findOne({ userid: req.body.userid });
     if (user) {
-      res.json({ error: '중복된 아이디가 있습니다.' });
+      res.send(401).send('중복된 아이 존재');
     } else {
       signUp(user, req, res);
-      // const hashedPassword = await bcrypt.hash(req.body.password.trim(), 12);
-      // const user = new User({
-      //   userid: req.body.userid,
-      //   password: hashedPassword,
-      //   username: req.body.username,
-      // });
-      // const newUser = await user.save();
-      // const payload = {
-      //   userid: newUser.userid,
-      //   username: newUser.username,
-      // };
-      // try {
-      //   const token = jwt.sign(payload, 'secret', { expiresIn: '1d' });
-      //   res.json({ token });
-      // } catch {
-      //   res.json({ error: 'token 생성이 실패하였습니다.' });
-      // }
     }
-  } catch (err) {
-    res.json({ error: err.message });
+  } catch {
+    res.send(500).send('서버단 회원가입 에러가 발생했음');
   }
-  //토큰 post 로 보내기
 });
 
 module.exports = router;
