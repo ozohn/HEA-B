@@ -1,5 +1,14 @@
 const jwt = require('jsonwebtoken');
 
+function checkToken(req, res, next) {
+	const authHeader = req.get('authorization');
+	if(authHeader) {
+		checkAuth(authHeader);
+	} else {
+		next();
+	}
+}
+
 function checkAuth(header) {
 	console.log(header);
 	const token = header.split(' ')[1];
@@ -17,31 +26,6 @@ function checkVerify(req, err, user) {
 	req.user = user;
 }
 
-function checkToken(req, res, next) {
-	const authHeader = req.get('authorization');
-	if(authHeader) {
-		checkAuth(authHeader);
-	} else {
-		next();
-	}
-	// console.log(authHeader);
-  // if (authHeader) {
-  //   const token = authHeader.split(' ')[1];
-  //   if (token) {
-  //     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-  //       if (err) {
-  //         console.log(err);
-  //       }
-  //       req.user = user;
-  //       next();
-  //     });
-  //   }
-  //   next();
-  // } else {
-  //   next();
-  // }
-}
-//indent 를 줄이는 리팩토링
 function isLoggedIn(req, res, next) {
   if (req.user) {
     next();
