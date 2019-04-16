@@ -1,29 +1,28 @@
 const jwt = require('jsonwebtoken');
 
 function checkToken(req, res, next) {
-	const authHeader = req.get('authorization');
-	if(authHeader) {
-		checkAuth(authHeader);
-	} else {
-		next();
-	}
+  const authHeader = req.get('authorization');
+  if (authHeader) {
+    checkAuth(authHeader);
+  } else {
+    next();
+  }
 }
 
 function checkAuth(header) {
-	console.log(header);
-	const token = header.split(' ')[1];
-	if(token) {
-		jwt.verify(token, process.env.TOKEN_SECRET, checkVerify)
-	} else {
-		next();
-	}
+  const token = header.split(' ')[1];
+  if (token) {
+    jwt.verify(token, process.env.TOKEN_SECRET, checkVerify);
+  } else {
+    next();
+  }
 }
 
 function checkVerify(req, err, user) {
-	if(err) {
-		console.log(err)
-	}
-	req.user = user;
+  if (err) {
+    console.log(err);
+  }
+  req.user = user;
 }
 
 function isLoggedIn(req, res, next) {
