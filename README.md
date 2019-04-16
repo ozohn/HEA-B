@@ -60,13 +60,13 @@ Users().where({
 Add JWT-based authentication to a Node/Express/Mongo app
 
 ## Authentication
-* [x] Create Server
-* [x] Add auth router
-* [x] Create user with POST /auth/signup
-  * [x] validate required fields
-  * [x] Check if email is unique
-  * [x] hash password with bcrypy
-  * [x] insert into db
+* [ ] Create Server
+* [ ] Add auth router
+* [ ] Create user with POST /auth/signup
+  * [ ] validate required fields
+  * [ ] Check if email is unique
+  * [ ] hash password with bcrypy
+  * [ ] insert into db
 * [ ] Login user with POST /auth/login
   * [ ] check if email in db
 		* [ ] compare password with hashed password in db
