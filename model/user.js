@@ -15,12 +15,15 @@ const userSchema = new mongoose.Schema({
   },
   userimage: {
     type: String,
+    default: '',
   },
   userdesc: {
     type: String,
+    default: '',
   },
   userworks: {
     type: Array,
+    default: [],
   },
 });
 
