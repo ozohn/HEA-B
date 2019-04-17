@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 });
 
 const checkTokenError = (err, token, res) => {
-  if (err) res.status(500).send('토큰 생성 에러');
+  if (err) res.sendStatus(500).send('토큰 생성 에러');
   res.json({ token });
 }
 
@@ -31,7 +31,7 @@ async function signIn(user, req, res) {
       (err, token) => checkTokenError(err, token, res)
     );
   } else {
-    res.status(401).send('비밀번호가 일치하지 않음');
+    res.sendStatus(401);
   }
 }
 
@@ -42,7 +42,7 @@ router.post('/signin', async (req, res) => {
       signIn(user, req, res);
     }
   } catch {
-    res.status(401).send('데이터베이스에 일치하는 아이디 정보 없음.');
+    res.sendStatus(401);
   }
 });
 
@@ -67,16 +67,29 @@ async function signUp(user, req, res) {
   res.json({ token });
 }
 
+router.post('/checkid', async (req, res) => {
+  try {
+    const user = await User.findOne({ userid: req.body.userid });
+    if(user) {
+      res.sendStatus(401).send('중복된 아이디 존재');
+    } else {
+      res.sendStatus(200).send('중복된 아이디 없음');
+    }
+  } catch {
+    res.sendStatus(500).send('서버단 에러 발생')
+  }
+});
+
 router.post('/signup', async (req, res) => {
   try {
     const user = await User.findOne({ userid: req.body.userid });
     if (user) {
-      res.send(401).send('중복된 아이 존재');
+      res.sendStatus(401).send('중복된 아이디 존재');
     } else {
       signUp(user, req, res);
     }
   } catch {
-    res.send(500).send('서버단 회원가입 에러가 발생했음');
+    res.sendStatus(500).send('서버단 회원가입 에러가 발생했음');
   }
 });
 
