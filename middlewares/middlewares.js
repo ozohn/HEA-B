@@ -30,7 +30,7 @@ function isLoggedIn(req, res, next) {
     next();
   } else {
     const error = new Error('Un-Authorized');
-    res.state(401);
+    res.sendState(401);
     next(error);
   }
 }

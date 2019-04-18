@@ -9,7 +9,7 @@ const middlewares = require('./middlewares/middlewares.js');
 
 const indexRouter = require('./routes/index.js');
 const usersRouter = require('./routes/users.js');
-const changeUserDataRouter = require('./routes/changeUserData.js');
+const creatorRouter = require('./routes/creator.js');
 
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
 app.use(express.json());
@@ -26,6 +26,6 @@ db.once('open', () => console.log('Connected to Mongoose'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/changeUserData', changeUserDataRouter);
+app.use('/creator', creatorRouter);
 
 app.listen(process.env.PORT || 3000);
