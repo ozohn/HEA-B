@@ -3,26 +3,29 @@ const jwt = require('jsonwebtoken');
 function checkToken(req, res, next) {
   const authHeader = req.get('authorization');
   if (authHeader) {
-    checkAuth(authHeader);
+    checkAuth(authHeader, req, next);
   } else {
     next();
   }
 }
 
-function checkAuth(header) {
+function checkAuth(header, req, next) {
   const token = header.split(' ')[1];
   if (token) {
-    jwt.verify(token, process.env.TOKEN_SECRET, checkVerify);
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      checkVerify(err, user, req, next);
+    })
   } else {
     next();
   }
 }
 
-function checkVerify(req, err, user) {
+function checkVerify(err, user, req, next) {
   if (err) {
     console.log(err);
   }
   req.user = user;
+  next();
 }
 
 function isLoggedIn(req, res, next) {
@@ -30,7 +33,7 @@ function isLoggedIn(req, res, next) {
     next();
   } else {
     const error = new Error('Un-Authorized');
-    res.state(401);
+    res.sendState(401);
     next(error);
   }
 }
