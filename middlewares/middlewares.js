@@ -3,24 +3,24 @@ const jwt = require('jsonwebtoken');
 function checkToken(req, res, next) {
   const authHeader = req.get('authorization');
   if (authHeader) {
-    checkAuth(authHeader, req, next);
+    checkAuth(authHeader, req, res, next);
   } else {
     next();
   }
 }
 
-function checkAuth(header, req, next) {
+function checkAuth(header, req, res, next) {
   const token = header.split(' ')[1];
   if (token) {
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-      checkVerify(err, user, req, next);
+      checkVerify(err, user, req, res, next);
     })
   } else {
     next();
   }
 }
 
-function checkVerify(err, user, req, next) {
+function checkVerify(err, user, req, res, next) {
   if (err) {
     res.send(err.message);
   }
