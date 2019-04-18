@@ -22,7 +22,7 @@ function checkAuth(header, req, next) {
 
 function checkVerify(err, user, req, next) {
   if (err) {
-    console.log(err);
+    res.send(err.message);
   }
   req.user = user;
   next();
