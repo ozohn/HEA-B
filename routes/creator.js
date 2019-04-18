@@ -31,8 +31,8 @@ router.post('/', async(req, res) => {
       username: user.username,
     })
     res.json( creatorData )
-  } catch {
-    res.sendStatus(500).send('서버단 에러 발생');
+  } catch (err) {
+    res.send(err.message);
   }
 })
 
