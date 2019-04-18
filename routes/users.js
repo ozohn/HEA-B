@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 const checkTokenError = (err, token, res) => {
   if (err) res.sendStatus(500).send('토큰 생성 에러');
   res.json({ token });
-}
+};
 
 async function signIn(user, req, res) {
   const bMatch = await bcrypt.compare(req.body.password, user.password);
@@ -62,20 +62,20 @@ async function signUp(user, req, res) {
     payload,
     process.env.TOKEN_SECRET,
     { expiresIn: '1d' },
-    (err, token) => checkTokenError( err, token, res)
+    (err, token) => checkTokenError(err, token, res)
   );
 }
 
 router.post('/checkid', async (req, res) => {
   try {
     const user = await User.findOne({ userid: req.body.userid });
-    if(user) {
+    if (user) {
       res.sendStatus(401).send('중복된 아이디 존재');
     } else {
       res.sendStatus(200).send('중복된 아이디 없음');
     }
   } catch {
-    res.sendStatus(500).send('서버단 에러 발생')
+    res.sendStatus(500).send('서버단 에러 발생');
   }
 });
 
