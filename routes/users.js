@@ -64,7 +64,6 @@ async function signUp(user, req, res) {
     { expiresIn: '1d' },
     (err, token) => checkTokenError( err, token, res)
   );
-  res.json({ token });
 }
 
 router.post('/checkid', async (req, res) => {
