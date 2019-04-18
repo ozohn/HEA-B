@@ -25,11 +25,11 @@ router.post('/', async(req, res) => {
   try {
     const query = ({ userid: req.user.userid})
     const user = await User.findOne(query)
-    const creatorData = ({
+    const creatorData = {
       userimage: user.userimage,
       userdesc: user.userdesc,
       username: user.username,
-    })
+    }
     res.json( creatorData )
   } catch (err) {
     res.send(err.message);
