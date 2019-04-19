@@ -8,7 +8,6 @@ const User = require('../model/user.js');
 router.post('/edit', async (req, res) => {
   try {
     const query = { userid: req.user.userid };
-    console.log(query);
     const updatedData = {
       userimage: req.body.userimage,
       userdesc: req.body.userdesc,
