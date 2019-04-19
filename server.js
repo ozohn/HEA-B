@@ -30,4 +30,4 @@ app.use('/users', usersRouter);
 app.use('/creator', creatorRouter);
 app.use('/main', mainRouter);
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 5000);
