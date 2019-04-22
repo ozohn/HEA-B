@@ -13,6 +13,18 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userimage: {
+    type: String,
+    default: '',
+  },
+  userdesc: {
+    type: String,
+    default: '',
+  },
+  userworks: {
+    type: Array,
+    default: [],
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);
