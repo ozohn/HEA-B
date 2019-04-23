@@ -12,10 +12,9 @@ const workSchema = new mongoose.Schema({
     type: String
   },
   userid: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "User"
+    type: String,
+    required: true
   }
 });
 
-module.exports = mongoose.model("Work", userSchema);
+module.exports = mongoose.model("Work", workSchema);
