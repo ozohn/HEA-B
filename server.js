@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index.js');
 const usersRouter = require('./routes/users.js');
 const creatorRouter = require('./routes/creator.js');
 const mainRouter = require('./routes/main.js');
+const searchRouter = require('./routes/search.js');
 
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
 app.use(express.json());
@@ -29,5 +30,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/creator', creatorRouter);
 app.use('/main', mainRouter);
+app.use('/search', searchRouter);
 
 app.listen(process.env.PORT || 5000);
