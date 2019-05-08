@@ -19,11 +19,13 @@ router.post("/add", async (req, res) => {
       worktitle: req.body.worktitle,
       workimage: req.body.workimage,
       workdesc: req.body.workdesc,
+      workview: false,
       userid: req.user.userid
     };
     const work = new Work(query);
-    const newData = await work.save();
-    res.json(newData);
+    await work.save();
+    const works = await Work.find({ userid: req.user.userid });
+    res.json(works);
   } catch (err) {
     res.send(err.message);
   }
