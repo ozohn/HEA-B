@@ -3,16 +3,16 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require('express');
 const router = express.Router();
-const User = require('../model/user.js');
+const Work = require('../model/work.js');
 
-router.post('/users', async (req, res) => {
-  await User.find({}, 'username userimage userdesc', (err, users) => {
+router.post('/works', async (req, res) => {
+  await Work.find({}, '_id workimage workdesc', (err, users) => {
     try {
       res.json(users);
-    } catch(err) {
+    } catch (err) {
       res.send(err.message);
     }
-  })
+  });
 });
 
 module.exports = router;
