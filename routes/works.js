@@ -43,4 +43,21 @@ router.post("/view", async (req, res) => {
   }
 });
 
+router.post("/edit", async (req, res) => {
+  try {
+    const query = {
+      _id: req.body.workid
+    };
+    const updatedData = {
+      worktitle: req.body.worktitle,
+      workdesc: req.body.workdesc,
+      workimage: req.body.workimage
+    };
+    const work = await Work.findOneAndUpdate(query, updatedData);
+    res.json({ ...updatedData, _id: req.body.workid });
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
 module.exports = router;
