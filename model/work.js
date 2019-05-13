@@ -1,18 +1,20 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const workSchema = new mongoose.Schema({
   worktitle: {
     type: String,
-    default: '',
+    required: true
   },
   workimage: {
-    type: String,
-    default: '',
+    type: String
   },
   workdesc: {
-    type: String,
-    default: '',
+    type: String
   },
+  userid: {
+    type: String,
+    required: true
+  }
 });
 
-module.exports = mongoose.model('Work', workSchema);
+module.exports = mongoose.model("Work", workSchema);
