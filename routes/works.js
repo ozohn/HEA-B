@@ -60,4 +60,16 @@ router.post("/edit", async (req, res) => {
   }
 });
 
+router.post("/remove", async (req, res) => {
+  try {
+    const query = {
+      _id: req.body.workid
+    };
+    const work = await Work.findOneAndRemove(query);
+    res.json(work);
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
 module.exports = router;
