@@ -12,7 +12,9 @@ router.post('/works', async (req, res) => {
     } catch (err) {
       res.send(err.message);
     }
-  });
+  })
+    .skip(req.body.index)
+    .limit(1);
 });
 
 module.exports = router;
