@@ -7,7 +7,6 @@ const _u = require('../util.js');
 
 router.post('/author', async (req, res) => {
   try {
-    console.log(req.body);
     const pattern = new RegExp(req.body.inputValue);
     const user = await User.find(
       { username: pattern },
@@ -17,6 +16,24 @@ router.post('/author', async (req, res) => {
       res.json(user);
     } else {
       res.status(404).send({ message: '일치하는 정보 없음' });
+    }
+  } catch {
+    res.sendStatus(404);
+  }
+});
+
+router.post('/author/pages', async (req, res) => {
+  try {
+    const user = await User.findOne(
+      { userid: req.body.userid },
+      { username: true, userdesc: true, userimage: true }
+    );
+    const works = await Work.find({ userid: req.body.userid });
+    const obj = { user, works };
+    if (user) {
+      res.json(obj);
+    } else {
+      res.status(404).send({ message: '전달된 데이터 없음' });
     }
   } catch {
     res.sendStatus(404);
