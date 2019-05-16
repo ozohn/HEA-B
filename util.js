@@ -1,6 +1,6 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const User = require('./model/user.js');
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const User = require("./model/user.js");
 
 const getQurey = req => {
   return { userid: req.user.userid };
@@ -8,6 +8,7 @@ const getQurey = req => {
 
 const updateData = user => {
   return {
+    userid: user.userid,
     userimage: user.userimage,
     userdesc: user.userdesc,
     username: user.username
@@ -15,7 +16,7 @@ const updateData = user => {
 };
 
 const checkTokenError = (err, token, res) => {
-  if (err) res.sendStatus(500).send('토큰 생성 에러');
+  if (err) res.sendStatus(500).send("토큰 생성 에러");
   res.json({ token });
 };
 
@@ -29,11 +30,11 @@ const signIn = async (user, req, res) => {
     const token = await jwt.sign(
       payload,
       process.env.TOKEN_SECRET,
-      { expiresIn: '1d' },
+      { expiresIn: "1d" },
       (err, token) => checkTokenError(err, token, res)
     );
   } else {
-    res.status(401).send({ message: '비밀번호 틀림' });
+    res.status(401).send({ message: "비밀번호 틀림" });
   }
 };
 
@@ -52,7 +53,7 @@ const signUp = async (user, req, res) => {
   const token = jwt.sign(
     payload,
     process.env.TOKEN_SECRET,
-    { expiresIn: '1d' },
+    { expiresIn: "1d" },
     (err, token) => checkTokenError(err, token, res)
   );
 };
