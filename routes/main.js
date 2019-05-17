@@ -7,7 +7,7 @@ const Work = require('../model/work.js');
 
 router.post('/works', async (req, res) => {
   console.log('start');
-  await Work.find({}, '_id workimage workdesc', (err, users) => {
+  await Work.find({}, '_id workimage workdesc worktitle', (err, users) => {
     try {
       res.json(users);
     } catch (err) {
