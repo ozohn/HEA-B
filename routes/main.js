@@ -7,16 +7,16 @@ const Work = require('../model/work.js');
 
 router.post('/works', async (req, res) => {
   console.log('start');
-  await Work.find({}, '_id worktitle workimage workdesc', (err, users) => {
+  await Work.find({}, '_id worktitle workimage workdesc', (err, works) => {
     try {
-      res.json(users);
+      console.log(works.length);
+      res.json(works);
     } catch (err) {
       res.send(err.message);
     }
   })
     .skip((req.body.index - 1) * 24)
     .limit(24);
-  console.log('end');
 });
 
 module.exports = router;
