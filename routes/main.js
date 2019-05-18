@@ -1,15 +1,14 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Work = require('../model/work.js');
+const Work = require("../model/work.js");
 
-router.post('/works', async (req, res) => {
-  console.log('start');
-  await Work.find({}, '_id worktitle workimage workdesc', (err, works) => {
+router.post("/works", async (req, res) => {
+  console.log("start");
+  await Work.find({}, "_id worktitle workimage workdesc", (err, works) => {
     try {
-      console.log(works.length);
       res.json(works);
     } catch (err) {
       res.send(err.message);
