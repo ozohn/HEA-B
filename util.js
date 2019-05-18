@@ -8,7 +8,6 @@ const getQurey = req => {
 
 const updateData = user => {
   return {
-    userid: user.userid,
     userimage: user.userimage,
     userdesc: user.userdesc,
     username: user.username
