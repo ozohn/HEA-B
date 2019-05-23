@@ -19,12 +19,12 @@ router.post("/add", async (req, res) => {
       worktitle: req.body.worktitle,
       workimage: req.body.workimage,
       workdesc: req.body.workdesc,
-      workview: false,
       userid: req.user.userid
     };
     const work = new Work(query);
     await work.save();
     const works = await Work.find({ userid: req.user.userid });
+    console.log(works);
     res.json(works);
   } catch (err) {
     res.send(err.message);
@@ -55,6 +55,18 @@ router.post("/edit", async (req, res) => {
     };
     const work = await Work.findOneAndUpdate(query, updatedData);
     res.json({ ...updatedData, _id: req.body.workid });
+  } catch (err) {
+    res.send(err.message);
+  }
+});
+
+router.post("/remove", async (req, res) => {
+  try {
+    const query = {
+      _id: req.body.workid
+    };
+    const work = await Work.findOneAndRemove(query);
+    res.json(work);
   } catch (err) {
     res.send(err.message);
   }
