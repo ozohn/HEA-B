@@ -23,6 +23,7 @@ const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true
 });
+// 데이터베이스 캐시(어떻게 개선할지 공부해보기) 레딕스? 개선방법을 찾아라도 볼것
 const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.once('open', () => console.log('Connected to Mongoose'));
