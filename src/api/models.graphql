@@ -1,13 +1,13 @@
 type User {
-  id: ID! @id
-  name: String! @unique
+  id: ID!
+  name: String!
+  photo: String
   bio: String
   works: [Work!]
-  photo: String
 }
 
 type Work {
-  id: ID! @id
+  id: ID!
   title: String!
   description: String
   photo: String
