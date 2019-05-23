@@ -1,9 +1,12 @@
 type User {
   id: ID!
-  name: String!
-  photo: String
-  bio: String
+  userid: String!
+  username: String
+  userimage: String
+  userdesc: String
   works: [Work!]
+  getUserInfo: User!
+  getSearchedUsers: [User!]
 }
 
 type Work {
