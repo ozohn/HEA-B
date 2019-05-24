@@ -1,4 +1,4 @@
-import { prisma } from "../../../../generated/prisma-client";
+import { User } from "../../../../model/user";
 
 export default {
   Mutation: {
@@ -6,15 +6,15 @@ export default {
       // isAuthenticated(request);
       const { userid, username, userimage, userdesc } = args;
       const query = { userid };
-      await User.findOneAndUpdate(query);
-      const updatedData = await User.findOne(query, {
-        userid: true,
-        username: true,
-        userimage: true,
-        userdesc: true
+      await User.findOneAndUpdate(query, {
+        $set: {
+          userid,
+          username,
+          userimage,
+          userdesc
+        }
       });
-
-      return updatedData;
+      return await User.findOne(query);
     }
   }
 };

@@ -11,7 +11,9 @@ type User {
 
 type Work {
   id: ID!
-  title: String!
-  description: String
-  photo: String
+  workid: String!
+  worktitle: String!
+  workdesc: String
+  workimage: String
+  userid: String!
 }

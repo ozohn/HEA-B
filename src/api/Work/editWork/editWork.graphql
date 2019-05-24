@@ -4,10 +4,11 @@ enum ACTIONS {
 }
 
 type Mutation {
-  editPost(
-    id: String!
-    caption: String
-    location: String
+  editWork(
+    worktitle: String!
+    workdesc: String
+    workimage: String
     action: ACTIONS!
-  ): Work!
+    userid: String!
+  ): User!
 }

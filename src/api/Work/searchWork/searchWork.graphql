@@ -1,3 +1,3 @@
 type Query {
-  searchWork(term: String!): [Work!]!
+  searchWork(term: String!): [User!]
 }

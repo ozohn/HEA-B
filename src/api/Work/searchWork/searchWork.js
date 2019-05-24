@@ -1,10 +1,13 @@
-import Work from "../../../../model/work";
+import { User } from "../../../../model/user";
 
 export default {
   Query: {
     searchWork: async (_, args) => {
-      const pattern = new RegExp(req.body.inputValue);
-      return await Work.find({ worktitle: pattern });
+      const { term } = args;
+      const pattern = new RegExp(term);
+      return await User.find({
+        "works.worktitle": pattern
+      });
     }
   }
 };
