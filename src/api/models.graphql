@@ -1,0 +1,19 @@
+type User {
+  id: ID!
+  userid: String!
+  username: String
+  userimage: String
+  userdesc: String
+  works: [Work!]
+  getUserInfo: User!
+  getSearchedUsers: [User!]
+}
+
+type Work {
+  id: ID!
+  workid: String!
+  worktitle: String!
+  workdesc: String
+  workimage: String
+  userid: String!
+}
