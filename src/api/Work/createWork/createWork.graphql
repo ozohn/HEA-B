@@ -1,3 +1,3 @@
 type Mutation {
-  upload(caption: String!, files: [String!]!, location: String): Work!
+  createWork(worktitle: String!, workdesc: String, workimage: String): Work!
 }

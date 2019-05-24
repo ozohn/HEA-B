@@ -2,12 +2,18 @@ import { prisma } from "../../../../generated/prisma-client";
 
 export default {
   Mutation: {
-    editUser: (_, args, { request, isAuthenticated }) => {
+    editUser: async (_, args, { request, isAuthenticated }) => {
       // isAuthenticated(request);
       const { userid, username, userimage, userdesc } = args;
-      const query = {username, userimage, userdesc}
-      await User.findOneAndUpdate(query, _u.updateData(req.body));
-      const updatedData = await User.findOne({userid});
+      const query = { userid };
+      await User.findOneAndUpdate(query);
+      const updatedData = await User.findOne(query, {
+        userid: true,
+        username: true,
+        userimage: true,
+        userdesc: true
+      });
+
       return updatedData;
     }
   }
