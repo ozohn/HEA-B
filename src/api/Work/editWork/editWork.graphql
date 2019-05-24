@@ -1,0 +1,14 @@
+enum ACTIONS {
+  EDIT
+  DELETE
+}
+
+type Mutation {
+  editWork(
+    worktitle: String!
+    workdesc: String
+    workimage: String
+    action: ACTIONS!
+    userid: String!
+  ): User!
+}

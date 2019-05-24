@@ -1,0 +1,8 @@
+type Mutation {
+  createWork(
+    worktitle: String!
+    workdesc: String
+    workimage: String
+    userid: String!
+  ): User!
+}
