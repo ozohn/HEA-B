@@ -1,12 +1,12 @@
-import { User } from "../../../../model/user";
+import { Work } from "../../../../model/work";
 
 export default {
   Query: {
     searchWork: async (_, args) => {
       const { term } = args;
       const pattern = new RegExp(term);
-      return await User.find({
-        "works.worktitle": pattern
+      return await Work.find({
+        worktitle: pattern
       });
     }
   }
