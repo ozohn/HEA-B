@@ -7,6 +7,9 @@ type User {
   works: [Work!]
   getUserInfo: User!
   getSearchedUsers: [User!]
+  users: [User!]
+  worksCount: Int!
+  isSelf: User!
 }
 
 type Work {

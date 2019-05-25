@@ -4,5 +4,5 @@ type Query {
     username: String
     userdesc: String
     userimage: String
-  ): User
+  ): User!
 }
