@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
-import passport from "passport";
-import { Strategy, ExtractJwt } from "passport-jwt";
-import User from "../model/user";
+import passport from 'passport';
+import { Strategy, ExtractJwt } from 'passport-jwt';
+import User from '../model/user';
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -25,7 +25,7 @@ const verifyUser = async (payload, done) => {
 };
 
 export const authenticateToken = (req, res, next) =>
-  passport.authenticate("jwt", { sessions: false }, (error, user) => {
+  passport.authenticate('jwt', { sessions: false }, (error, user) => {
     if (user) {
       req.user = user;
     }
