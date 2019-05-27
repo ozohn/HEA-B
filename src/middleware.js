@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
-import passport from "passport";
-import { Strategy, ExtractJwt } from "passport-jwt";
-import User from "../model/user";
+import passport from 'passport';
+import { Strategy, ExtractJwt } from 'passport-jwt';
+import User from '../model/user';
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -11,7 +11,7 @@ const params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 
-const verifyUser = async (patload, done) => {
+const verifyUser = async (payload, done) => {
   try {
     const user = await User.findOne({ userid: payload.userid });
     if (user) {
@@ -25,7 +25,7 @@ const verifyUser = async (patload, done) => {
 };
 
 export const authenticateToken = (req, res, next) =>
-  passport.authenticate("jwt", { sessions: false }, (error, user) => {
+  passport.authenticate('jwt', { sessions: false }, (error, user) => {
     if (user) {
       req.user = user;
     }
