@@ -4,5 +4,9 @@ type Query {
     username: String
     userdesc: String
     userimage: String
+<<<<<<< HEAD
   ): User
+=======
+  ): User!
+>>>>>>> 6c280266f9bc3663a45925880bc50e91fc3f1c25
 }

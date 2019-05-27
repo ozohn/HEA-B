@@ -10,10 +10,6 @@ const workSchema = new mongoose.Schema({
   },
   workdesc: {
     type: String
-  },
-  userid: {
-    type: String,
-    required: true
   }
 });
 

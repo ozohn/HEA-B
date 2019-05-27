@@ -4,5 +4,5 @@ type Mutation {
     workdesc: String
     workimage: String
     userid: String!
-  ): User!
+  ): Work!
 }
