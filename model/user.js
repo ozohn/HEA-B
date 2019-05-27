@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { workSchema } from "./work";
+import mongoose from 'mongoose';
+import { workSchema } from './work';
 
 const userSchema = new mongoose.Schema({
   userid: {
@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
     type: [workSchema]
   }
 });
-
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 export { User, userSchema };

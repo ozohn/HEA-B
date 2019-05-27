@@ -1,4 +1,4 @@
-import { Work } from "../../../../model/work";
+import { Work } from '../../../../model/work';
 
 export default {
   Query: {
