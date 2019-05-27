@@ -6,9 +6,9 @@ import { generateToken } from '../../../utils';
 export default {
   Mutation: {
     signIn: async (_, args) => {
-      console.log(args);
       const { userid, password } = args;
       const user = await User.findOne({ userid });
+      if (user === null) return 'notFound';
       const bMatch = await bcrypt.compare(password, user.password);
       if (bMatch) {
         const payload = {
