@@ -5,7 +5,7 @@ type Mutation {
     username: String
     userimage: String
     userdesc: String
-  ): User!
+  ): String!
 }
 
 type Query {
