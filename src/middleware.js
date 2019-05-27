@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import passport from 'passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-import User from '../model/user';
+import { User } from '../model/user';
 
 const TOKEN_SECRET = process.env.TOKEN_SECRET;
 
@@ -13,7 +13,8 @@ const params = {
 
 const verifyUser = async (payload, done) => {
   try {
-    const user = await User.findOne({ userid: payload.userid });
+    //? payload ={userid: {userid: ~~~}, init:1920i019?
+    const user = await User.findOne({ userid: payload.userid.userid });
     if (user) {
       return done(null, user);
     } else {
