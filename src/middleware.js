@@ -11,7 +11,7 @@ const params = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
 };
 
-const verifyUser = async (patload, done) => {
+const verifyUser = async (payload, done) => {
   try {
     const user = await User.findOne({ userid: payload.userid });
     if (user) {
