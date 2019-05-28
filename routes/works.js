@@ -24,7 +24,6 @@ router.post("/add", async (req, res) => {
     const work = new Work(query);
     await work.save();
     const works = await Work.find({ userid: req.user.userid });
-    console.log(works);
     res.json(works);
   } catch (err) {
     res.send(err.message);
