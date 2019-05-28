@@ -5,9 +5,10 @@ enum ACTIONS {
 
 type Mutation {
   editWork(
+    workid: String!
     worktitle: String!
     workdesc: String
     workimage: String
-    action: ACTIONS!
-  ): User!
+    action: String!
+  ): Work!
 }
