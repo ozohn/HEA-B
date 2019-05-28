@@ -4,12 +4,12 @@ import { GraphQLServer } from "graphql-yoga";
 import logger from "morgan";
 import schema from "./schema";
 import "./middleware";
-import { authenticateToken } from "./middleware";
+import { authenticateToken, isAuthenticated } from "./middleware";
 
 const PORT = process.env.PORT || 5000;
 const server = new GraphQLServer({
   schema,
-  context: ({ request }) => ({ request })
+  context: ({ request }) => ({ request, isAuthenticated })
 });
 
 const mongoose = require("mongoose");

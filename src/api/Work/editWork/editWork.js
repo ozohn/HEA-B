@@ -6,7 +6,7 @@ const EDIT = "EDIT";
 export default {
   Mutation: {
     editWork: async (_, args, { request, isAuthenticated }) => {
-      // isAuthenticated(request);
+      isAuthenticated({ request });
       const { worktitle, workdesc, workimage, userid, action } = args;
       const updateData = { workdesc, workimage };
       const query = { userid };
