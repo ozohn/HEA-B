@@ -4,7 +4,9 @@ export default {
   Mutation: {
     deleteWork: async (_, args) => {
       const query = { _id: args.workid };
-      return await Work.findOneAndRemove(query);
+      const work = await Work.findOneAndRemove(query);
+      if (work) return true;
+      return false;
     }
   }
 };
