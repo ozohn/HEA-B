@@ -1,0 +1,3 @@
+type Query {
+  seeWorkById(id: String!): Work!
+}
