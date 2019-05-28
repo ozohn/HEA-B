@@ -14,9 +14,7 @@ type User {
 
 type Work {
   id: ID!
-  workid: String!
   worktitle: String!
   workdesc: String
   workimage: String
-  userid: String!
 }

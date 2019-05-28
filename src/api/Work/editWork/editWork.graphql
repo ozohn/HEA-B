@@ -9,6 +9,5 @@ type Mutation {
     workdesc: String
     workimage: String
     action: ACTIONS!
-    userid: String!
   ): User!
 }

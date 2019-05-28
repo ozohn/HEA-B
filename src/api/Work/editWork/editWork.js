@@ -1,4 +1,4 @@
-import { User } from "../../../../model/user";
+import { Work } from "../../../../model/work";
 
 const DELETE = "DELETE";
 const EDIT = "EDIT";
@@ -7,16 +7,12 @@ export default {
   Mutation: {
     editWork: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated({ request });
-      const { worktitle, workdesc, workimage, userid, action } = args;
-      const updateData = { workdesc, workimage };
-      const query = { userid };
+      const { worktitle, workdesc, workimage, action } = args;
+      const updateData = { worktitle, workdesc, workimage };
+      const query = { workid };
       if (action === EDIT) {
-        return await User.findOne(query, (err, user) => {
-          user.works.forEach(work => {
-            if (work.worktitle === worktitle) {
-              work = { ...work, ...updateData };
-            }
-          });
+        return await Work.findOneAndUpdate(query, {
+          $set: { worktitle, workdesc, workimage }
         });
       } else if (action === DELETE) {
         return await User.findOneAndRemove(query);

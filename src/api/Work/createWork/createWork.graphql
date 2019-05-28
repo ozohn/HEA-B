@@ -1,8 +1,7 @@
 type Mutation {
-  createWork(
-    worktitle: String!
-    workdesc: String
-    workimage: String
-    userid: String!
-  ): Work!
+  createWork(worktitle: String!, workdesc: String, workimage: String): Work!
+}
+
+type Query {
+  something: String
 }
