@@ -1,8 +1,3 @@
 type Mutation {
-  editUser(
-    userid: String!
-    username: String
-    userdesc: String
-    userimage: String
-  ): User!
+  editUser(username: String, userdesc: String, userimage: String): User!
 }
