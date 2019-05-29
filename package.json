@@ -20,17 +20,13 @@
     "mongoose": "^5.5.0",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
+    "dotenv": "^7.0.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "prisma-client-lib": "^1.33.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
-    "@babel/core": "^7.4.5",
-    "@babel/node": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "dotenv": "^7.0.0",
     "nodemon": "^1.18.11"
   },
   "scripts": {
