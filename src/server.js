@@ -5,6 +5,7 @@ import logger from "morgan";
 import schema from "./schema";
 import "./middleware";
 import { authenticateToken, isAuthenticated } from "./middleware";
+import cors from 'cors';
 
 const PORT = process.env.PORT || 5000;
 const server = new GraphQLServer({
@@ -21,6 +22,7 @@ const db = mongoose.connection;
 db.on("error", error => console.error(error));
 db.once("open", () => console.log("Connected to Mongoose"));
 
+server.express.use(cors());
 server.express.use(logger("dev"));
 server.express.use(authenticateToken);
 
