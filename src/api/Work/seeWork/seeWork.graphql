@@ -1,3 +1,3 @@
 type Query {
-  seeWork(userid: String!): User!
+  seeWork(workid: String!): Work!
 }

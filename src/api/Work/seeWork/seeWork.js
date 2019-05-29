@@ -1,11 +1,10 @@
-import { User } from "../../../../model/user";
+import { Work } from "../../../../model/work";
 
 export default {
   Query: {
-    seeWork: async (_, args, { request, isAuthenticated }) => {
-      const { userid } = args;
-      const query = { userid };
-      return await User.findOne(query);
+    seeWork: async (_, args) => {
+      const query = { _id: args.workid };
+      return await Work.findOne(query);
     }
   }
 };
