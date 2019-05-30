@@ -6,7 +6,7 @@ export default {
       const { index } = args;
       return await Work.find()
         .skip((index - 1) * 24)
-        .limit(24);
+        .limit(24 + 1);
     }
   }
 };
